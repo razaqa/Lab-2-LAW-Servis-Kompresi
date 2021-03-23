@@ -2,14 +2,17 @@ from .serializers import ZipFileSerializer
 from django.conf import settings
 from django.http import HttpResponse
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 import io
 import os
 import tarfile
 
 class FileCompressionAPIView(APIView):
     parser_classes = [MultiPartParser, FormParser]
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
         serializer = ZipFileSerializer(data=request.data)
