@@ -33,7 +33,7 @@ class FileCompressionAPIView(APIView):
             tar.close()
 
             response = HttpResponse(file_bytes.getvalue(), content_type='application/x-gzip')
-            response['Content-Disposition'] = 'attachment; filename={0}'.format(zipname)
+            response['Content-Disposition'] = 'attachment; filename="{0}"'.format(zipname)
             
             return response
 
